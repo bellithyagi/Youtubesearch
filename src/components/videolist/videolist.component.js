@@ -3,9 +3,8 @@ import Singlevideo from '../singlevideo/singlevideo.component';
 
 const Videolist = (props) =>{
 const videoitem = props.videos.map((video, index) => {
-  return <Singlevideo key={video.etag} video={video}/>
+  return <Singlevideo onVideoselect={props.onVideoselect} key={video.etag} video={video}/>
 })
-
 
   return (
     <div>

@@ -1,27 +1,27 @@
 import React, {
   Component
 } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import YTSearch from 'youtube-api-search';
 import Searchbar from './components/searchbar/searchbar.component';
 import Videolist from './components/videolist/videolist.component';
+import Videocontent from './components/videocontent/videocontent.component';
 
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    const apiKey = " AIzaSyCVnXEUX5Z_D0kj6aH1_Sq2RZSjSgD9m_o";
+    const apiKey = "AIzaSyCVnXEUX5Z_D0kj6aH1_Sq2RZSjSgD9m_o";
     this.state = {
-      videos: []
+      videos: [],
+      selectedVideo : null
     }
     YTSearch({
         key: apiKey,
         term: 'surfboards'
       },
       (videos) => {
-        console.log(videos);
         this.setState({
           videos
         })
@@ -30,7 +30,8 @@ class App extends Component {
   render() {
     return ( <div>
       <Searchbar / >
-      <Videolist videos = {this.state.videos}></Videolist>
+      <Videocontent video={this.state.selectedVideo}/>
+      <Videolist videos = {this.state.videos} onVideoselect={selectedVideo => this.setState({selectedVideo})}></Videolist>
       </div>
     );
   }
